@@ -29,6 +29,7 @@ public class Swerve extends SubsystemBase {
     public SwerveDriveOdometry swerveOdometry;
     public SwerveModule[] mSwerveMods;
     public Pigeon2 gyro;
+    public boolean isLimited;
 
     private final double rollDeadband = 8;
 
@@ -48,6 +49,8 @@ public class Swerve extends SubsystemBase {
         resetModulesToAbsolute();
 
         swerveOdometry = new SwerveDriveOdometry(Constants.Swerve.swerveKinematics, getYaw(), getModulePositions());
+        
+        isLimited = false;
     }
 
     public void resetModule(int index) {
@@ -193,6 +196,10 @@ public class Swerve extends SubsystemBase {
              )
          );
      }
+
+    public void limit() {
+        isLimited = !isLimited;
+    }
      
 
     @Override
