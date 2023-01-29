@@ -22,8 +22,10 @@ import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.math.trajectory.TrajectoryConfig;
 import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 import edu.wpi.first.math.trajectory.TrajectoryUtil;
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Filesystem;
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -51,6 +53,7 @@ public class Robot extends TimedRobot {
   private TrajectoryConfig config;
   private List<Trajectory> trajectories = new ArrayList<>();
   
+  Compressor compressor = new Compressor(PneumaticsModuleType.CTREPCM);
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
@@ -102,7 +105,8 @@ public class Robot extends TimedRobot {
     
       // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
       // autonomous chooser on the dashboard.
-      m_robotContainer = new RobotContainer();
+    m_robotContainer = new RobotContainer();
+    CommandScheduler.getInstance().enable();
     }
     
     private Trajectory loadTrajectory(String path) {
